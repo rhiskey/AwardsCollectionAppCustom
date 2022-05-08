@@ -37,15 +37,23 @@ struct AwardsView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(activeAwards, id: \.title) { award in
-                        VStack {
-                            award.awardView
-                            Text(award.title)
-                        }
+                CustomGridView(columns: 3, items: activeAwards) { (itemSize, award) in
+                    VStack {
+                        award.awardView
+                        Text(award.title)
                     }
-                }
-            }.navigationTitle("Your awords: \(activeAwards.count)")
+                    .padding()
+                    .frame(width: itemSize, height: itemSize)
+                } 
+//                LazyVGrid(columns: columns) {
+//                    ForEach(activeAwards, id: \.title) { award in
+//                        VStack {
+//                            award.awardView
+//                            Text(award.title)
+//                        }
+//                    }
+//                }
+            }.navigationTitle("Your awards: \(activeAwards.count)")
         }
     }
 }
